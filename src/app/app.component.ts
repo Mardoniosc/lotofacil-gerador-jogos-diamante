@@ -11,6 +11,13 @@ export class AppComponent implements OnInit {
   title = 'loterias-diamante';
   jogos: any[] = [];
 
+  detalhes: { titulo: string; descricao: string } = {
+    descricao: '',
+    titulo: '',
+  };
+
+  mostrarDetalhes = false;
+
   public numeroDeJogos: number = 0;
 
   ngOnInit() {}
@@ -106,9 +113,38 @@ export class AppComponent implements OnInit {
     toastr.success('23 Jogos gerados com sucesso', '', { timeOut: 8000 });
   }
 
+  ocultarDetalhes(): void {
+    this.mostrarDetalhes = false;
+  }
+
   limparJogos() {
     this.jogos = [];
     toastr.options.progressBar = true;
     toastr.info('Zerado os jogos salvos', '', { timeOut: 8000 });
+  }
+
+  mostrarDetalhesTipoJogo(numero: number): void {
+    switch (numero) {
+      case 0:
+        this.detalhes.titulo = 'Combinações aleatórias';
+        this.detalhes.descricao =
+          'Junção dos tipos Simples 22 para 14 e Simples 23 para 15 gerando a quantidade de jogos desejadas de acordo com a quantidade informada.';
+        this.mostrarDetalhes = true;
+        break;
+      case 1:
+        this.detalhes.titulo = '8 combinações de 22 números';
+        this.detalhes.descricao =
+          'As 8 combinações de 22 números que acertam no mínimo os 14 pontos em todos os concurso da Lotofácil';
+        this.mostrarDetalhes = true;
+        break;
+      case 2:
+        this.detalhes.titulo = '23 combinações de 23 números';
+        this.detalhes.descricao =
+          'As 23 combinações de 23 números que acertam os 15 pontos em todos os concurso da Lotofácil';
+        this.mostrarDetalhes = true;
+        break;
+      default:
+        break;
+    }
   }
 }

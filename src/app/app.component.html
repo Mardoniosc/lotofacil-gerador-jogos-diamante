@@ -1,56 +1,67 @@
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="https://www.loteriasdasorte.com/wp-content/uploads/2019/02/resultado-da-lotofacil.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-      Lotofácil
-    </a>
+<div class="container">
+
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="https://www.loteriasdasorte.com/wp-content/uploads/2019/02/resultado-da-lotofacil.jpg" alt="" width="30"
+          height="24" class="d-inline-block align-text-top">
+        Lotofácil
+      </a>
+    </div>
+  </nav>
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Tipo de jogo</th>
+          <th scope="col">Detalhes</th>
+          <th scope="col">Quantidade de jogos</th>
+          <th scope="col">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Jogos simples 8 e 23</td>
+          <td><button class="btn btn-primary" (click)="mostrarDetalhesTipoJogo(0)">Detalhes</button></td>
+          <td><input [(ngModel)]="numeroDeJogos" class="form-control" type="number" name="jogos" id="jogos"
+              placeholder="numero de jogos"></td>
+          <td><button class="btn btn-primary" type="button" (click)="gerarJogosSimples()">Gerar Jogos</button></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Simples 22 para 14</td>
+          <td><button class="btn btn-primary" (click)="mostrarDetalhesTipoJogo(1)">Detalhes</button></td>
+          <td>8</td>
+          <td><button class="btn btn-primary" type="button" (click)="gerarJogos8_14()">Gerar Jogos</button></td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Simples 23 para 15</td>
+          <td><button class="btn btn-primary" (click)="mostrarDetalhesTipoJogo(2)">Detalhes</button></td>
+          <td>23</td>
+          <td><button class="btn btn-primary" type="button" (click)="gerarJogos23_15()">Gerar Jogos</button></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-</nav>
-<div class="table-responsive">
-  <table class="table align-middle">
-    <thead>
+
+
+  <button class="btn btn-primary mb-2" (click)="ocultarDetalhes()" *ngIf="mostrarDetalhes">Ocultar detalhes</button>
+  <app-detalhes [titulo]="detalhes.titulo" [descricao]="detalhes.descricao" *ngIf="mostrarDetalhes"></app-detalhes>
+
+  <button class="btn btn-danger mb-2 mt-2" *ngIf="jogos.length > 0" (click)="limparJogos()">Limpar tabela de jogos</button>
+  <table class="table table-striped" *ngIf="jogos.length > 0">
+    <thead class="table-dark">
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Tipo de jogo</th>
-        <th scope="col">Quantidade de jogos</th>
-        <th scope="col">Ação</th>
+        <th>Jogos - {{jogos.length}}</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Jogos simples 8 e 23</td>
-        <td><input [(ngModel)]="numeroDeJogos" class="form-control" type="number" name="jogos" id="jogos" placeholder="numero de jogos"></td>
-        <td><button class="btn btn-primary" type="button" (click)="gerarJogosSimples()">Gerar Jogos</button></td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Simples 22 para 14</td>
-        <td>8</td>
-        <td><button class="btn btn-primary" type="button" (click)="gerarJogos8_14()">Gerar Jogos</button></td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Simples 23 para 15</td>
-        <td>23</td>
-        <td><button class="btn btn-primary" type="button" (click)="gerarJogos23_15()">Gerar Jogos</button></td>
+      <tr *ngFor="let jogo of jogos">
+        <td>{{jogo}}</td>
       </tr>
     </tbody>
   </table>
 </div>
-<br>
-<button class="btn btn-danger mb-2" *ngIf="jogos.length > 0" (click)="limparJogos()">Limpar tabela de jogos</button>
-<br>
-
-<table class="table table-striped" *ngIf="jogos.length > 0">
-  <thead class="table-dark">
-    <tr>
-      <th>Jogos</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let jogo of jogos">
-      <td>{{jogo}}</td>
-    </tr>
-  </tbody>
-</table>
