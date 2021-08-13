@@ -60,7 +60,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let jogo of jogos">
-        <td>{{jogo}}</td>
+        <td>
+          <app-jogo-lotofacil *ngFor="let j of jogo" [numero]="j"></app-jogo-lotofacil>
+        </td>
       </tr>
     </tbody>
   </table>
